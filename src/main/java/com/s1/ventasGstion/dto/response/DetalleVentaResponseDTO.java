@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public record DetalleVentaResponseDTO(
 
-        Integer cantidad, BigDecimal subtotal, NombreDetalleVentaProductoResponseDTO producto, VentaResponseDTO venta
+        Integer cantidad, BigDecimal subtotal, VentaResponseDTO producto, ProductoResponseDTO venta
 
 ) {
 }

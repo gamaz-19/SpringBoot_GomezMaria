@@ -1,12 +1,17 @@
 package com.s1.ventasGstion.model;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "detalle_venta")
-
+@Getter @Setter
+@NoArgsConstructor @AllArgsConstructor
 public class DetalleVenta {
 
     @Id

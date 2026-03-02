@@ -19,8 +19,6 @@ public class VentaMapper {
         );
 
     }
-
-
     //Conversion de DTO a entidad
 
     public Venta DTOaEntidad (VentaRequestDTO dto){

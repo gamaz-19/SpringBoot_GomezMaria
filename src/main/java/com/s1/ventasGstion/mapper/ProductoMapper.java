@@ -1,31 +1,27 @@
 package com.s1.ventasGstion.mapper;
 
-import com.s1.ventasGstion.dto.request.DetalleVentaRequestDTO;
 import com.s1.ventasGstion.dto.request.ProductoRequestDTO;
-import com.s1.ventasGstion.dto.request.VentaRequestDTO;
-import com.s1.ventasGstion.dto.response.DetalleVentaResponseDTO;
 import com.s1.ventasGstion.dto.response.ProductoResponseDTO;
-import com.s1.ventasGstion.dto.response.VentaResponseDTO;
 import com.s1.ventasGstion.model.Producto;
 import org.springframework.stereotype.Component;
 
 
 @Component
-public class DetalleVentaMapper {
+public class ProductoMapper {
 
     //conversion de entidad(modelo desde la base de datos) a dto( la estructura y data manipulada)
-    public DetalleVentaResponseDTO entidadaDTO(Producto DetalleVentaMapper){
-        if (DetalleVentaMapper == null) return null;
-        return new DetalleVentaResponseDTO(
-                DetalleVentaMapper.getNombre(), DetalleVentaMapper.getDescripcion(), DetalleVentaMapper.getPrecio(), DetalleVentaMapper.getStock()
+
+    public ProductoResponseDTO entidadaDTO(Producto productoMapper){
+        if (productoMapper == null) return null;
+        return new ProductoResponseDTO(
+                productoMapper.getNombre(), productoMapper.getDescripcion(), productoMapper.getPrecio(),productoMapper.getStock()
         );
 
     }
 
-
     //Conversion de DTO a entidad
 
-    public Producto DTOaEntidad (DetalleVentaResponseDTO dto){
+    public Producto DTOaEntidad (ProductoRequestDTO dto){
 
         if (dto == null) return null;
         Producto p= new Producto();
@@ -38,12 +34,12 @@ public class DetalleVentaMapper {
 
     // Actualizacion de entidad desde DTO
 
-    public void actualizarEntidadDesdeDTO(Producto DetalleVentaMapper, DetalleVentaRequestDTO dto ){
+    public void actualizarEntidadDesdeDTO(Producto productoMapper, ProductoRequestDTO dto ){
 
-        if (DetalleVentaMapper == null || dto == null) return;
-        DetalleVentaMapper.setNombre(dto.nombre());
-        DetalleVentaMapper.setDescripcion(dto.descripcion());
-        DetalleVentaMapper.setPrecio(dto.precio());
-        DetalleVentaMapper.setStock(dto.stock());
+        if (productoMapper == null || dto == null) return;
+        productoMapper.setNombre(dto.nombre());
+        productoMapper.setDescripcion(dto.descripcion());
+        productoMapper.setPrecio(dto.precio());
+        productoMapper.setStock(dto.stock());
     }
 }

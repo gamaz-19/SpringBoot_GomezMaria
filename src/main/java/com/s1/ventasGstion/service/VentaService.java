@@ -26,5 +26,5 @@ public interface VentaService {
 
     //BUSCAR POR ID
 
-    VentaRequestDTO buscarPorID(Long id);
+    VentaResponseDTO buscarPorID(Long id);
 }

@@ -12,7 +12,4 @@ public interface ProductoRepository extends JpaRepository<Producto, Long> {
 
     //Consultas para la base de datos, no son obligatorias, ya trae unaas por defecto
 
-    List<Producto>  findByPrecioGreaterThan(BigDecimal precioLimite);
-    Producto  findByTopByprecioDesc();
-
 }
