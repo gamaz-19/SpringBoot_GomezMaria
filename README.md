@@ -421,7 +421,7 @@ Desarrollado como proyecto académico para demostrar competencias en:
 
 ## Documentacion
 
-<a href="https://drive.google.com/file/d/1YDEwipKBkuFbSQMSECo0UTRg9cBwWIXy/view?usp=drive_link" target="_blank">
+<a href="https://docs.google.com/document/d/1cpmkCTgv-Xr_3nakGjsgHM3nQVQSIyzm/edit?usp=sharing&ouid=108926793492087208638&rtpof=true&sd=true" target="_blank">
   <img src="https://img.shields.io/badge/DOCUMENTACION-Google%20Drive-34A853?style=for-the-badge&logo=google-drive&logoColor=white" alt="Documento Drive">
 </a>
 
