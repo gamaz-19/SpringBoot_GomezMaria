@@ -419,6 +419,29 @@ Desarrollado como proyecto académico para demostrar competencias en:
 
 <div align="center">
 
+## Documentacion
+
+<a href="https://drive.google.com/file/d/1YDEwipKBkuFbSQMSECo0UTRg9cBwWIXy/view?usp=drive_link" target="_blank">
+  <img src="https://img.shields.io/badge/DOCUMENTACION-Google%20Drive-34A853?style=for-the-badge&logo=google-drive&logoColor=white" alt="Documento Drive">
+</a>
+<br>
+<a href="https://drive.google.com/file/d/1702Ax-IQTpNn1EGDZFG9GX4LC2SJGlyc/view?usp=sharing" target="_blank">
+  <img src="https://img.shields.io/badge/BD-Google%20Drive-34A853?style=for-the-badge&logo=google-drive&logoColor=white" alt="Documento Drive">
+</a>
+<br>
+<br><br>
+
+Aquí se encuentra la sustentación del proyecto **PIZZERIA** desarrollado con **MySQL**, donde se explica el modelado, la implementación y las funcionalidades clave de la base de datos.
+
+
+<br>
+
+</div>
+
+---
+
+<div align="center">
+
 **TecnoStore API • 2026**
 
 [![Java](https://img.shields.io/badge/Made_with-Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)](https://www.java.com)
