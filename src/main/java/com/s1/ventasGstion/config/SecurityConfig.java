@@ -17,77 +17,59 @@ import java.util.List;
 @Configuration
 @RequiredArgsConstructor
 public class SecurityConfig {
-    // Inyecto mi filtro JWT personalizado
-    // Este filtro es el que va a leer el token en cada petición
-    private final JwtFilter jwtFilter;
 
+    private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        /*
-         * Aquí estoy configurando toda la seguridad de la aplicación.
-         * En Spring Security moderno ya no se usa WebSecurityConfigurerAdapter,
-         * sino que se define un SecurityFilterChain como Bean.
-         */
         return http
-                // ESTA LÍNEA ES NUEVA PARA EL CORS
+                // 1. Configuración de CORS vinculada al bean de abajo
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                // Desactivo CSRF porque mi API es REST y trabaja con JWT (stateless).
-                // CSRF se usa más cuando hay sesiones y formularios.
+
+                // 2. Desactivar CSRF (Correcto para JWT)
                 .csrf(csrf -> csrf.disable())
 
-                // Le digo a Spring que no quiero sesiones.
-                // Cada request debe venir autenticado con su propio token.
+                // 3. Política sin estado (Stateless)
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 )
-                // Aquí defino qué endpoints son públicos y cuáles no.
+
+                // 4. Autorización de rutas
                 .authorizeHttpRequests(auth -> auth
-                        // Permito acceso libre al login.
-                        // Si lo protegiera, el usuario necesitaría token para obtener token.
-                        .requestMatchers("/auth/login").permitAll()
-                        //Esta me permite acceso OPTIONS, desde el frotend, evitando el CORS
+                        // Permite el login y registros
+                        .requestMatchers("/auth/**").permitAll()
+
+                        // --- RUTAS DE SWAGGER (Copia y pega estas) ---
+                        .requestMatchers("/v3/api-docs/**").permitAll()
+                        .requestMatchers("/swagger-ui/**").permitAll()
+                        .requestMatchers("/swagger-ui.html").permitAll()
+                        .requestMatchers("/swagger-resources/**").permitAll()
+                        .requestMatchers("/webjars/**").permitAll()
+                        // ---------------------------------------------
+
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-                        // Permito endpoints públicos de persona.
-                        // Esto lo hago para mostrar diferencia entre public y private.
                         .requestMatchers("/api/persona/public/**").permitAll()
-                        // Todo lo demás requiere autenticación.
-                        // Si no mandan token válido, no entra.
                         .anyRequest().authenticated()
                 )
-                /*
-                 * Aquí agrego mi filtro JWT antes del filtro
-                 * UsernamePasswordAuthenticationFilter.
-                 *
-                 * Porque quiero que primero se valide el token
-                 * antes de que Spring intente autenticar usuario y contraseña.
-                 *
-                 * Este filtro será el encargado de:
-                 * - Leer el header Authorization
-                 * - Extraer el token
-                 * - Validarlo
-                 * - Cargar el usuario en el contexto de seguridad
-                 */
+
+                // 5. Filtro JWT antes del filtro de usuario/password
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                // Finalmente construyo la configuración
+
                 .build();
     }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
-
         CorsConfiguration config = new CorsConfiguration();
 
-        config.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500"));
+        // Permitimos tanto localhost como la IP 127.0.0.1 (común en Live Server de VS Code)
+        config.setAllowedOrigins(List.of("http://127.0.0.1:5500", "http://localhost:5500", "http://localhost:3000"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("*"));
+        config.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         config.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source =
-                new UrlBasedCorsConfigurationSource();
-
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
-
         return source;
     }
 }

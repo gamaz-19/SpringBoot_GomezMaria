@@ -22,7 +22,7 @@ public class JwtService {
     /*
      * Tiempo de expiración del token.
      * Aquí lo estoy configurando a 30 minutos.
-     * (1000 ms * 60 seg * 30 min)
+     * (1000 ms * 60 seg * 30 min)S
      */
     private final long EXPIRATION = 1000 * 60 * 30; // 30 minutos
 
